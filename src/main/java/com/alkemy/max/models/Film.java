@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,16 +19,20 @@ public class Film {
     private Rating rating;
 
     @OneToMany(mappedBy="film", fetch=FetchType.EAGER)
-    private Set<Character> characters = new HashSet<>();
+    Set<CharacterFilm> characterFilms = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name="genre_id")
+    private Genre genre;
 
     public Film() {
     }
 
-    public Film(String title, String image, Date creationDate, Rating rating) {
+    public Film(String title, String image, Date creationDate, Rating rating, Genre genre) {
         this.title = title;
         this.image = image;
         this.creationDate = creationDate;
         this.rating = rating;
+        this.genre = genre;
     }
 
     public Long getId() {
@@ -68,11 +71,21 @@ public class Film {
         this.rating = rating;
     }
 
-    public Set<Character> getCharacters() {
-        return characters;
+
+    public Genre getGenre() {
+        return genre;
     }
-    public void addCharacter(Character character) {
-        character.setFilm(this);
-        characters.add(character);
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Set<CharacterFilm> getCharacterFilms() {
+        return characterFilms;
+    }
+
+    public void addCharacterFilms(CharacterFilm characterFilm) {
+        characterFilm.setFilm(this);
+        characterFilms.add(characterFilm);
     }
 }

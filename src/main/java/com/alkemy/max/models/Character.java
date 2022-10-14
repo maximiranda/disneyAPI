@@ -3,6 +3,8 @@ package com.alkemy.max.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Character {
@@ -15,19 +17,19 @@ public class Character {
     private Integer age;
     private Integer weight;
     private String story;
-    @ManyToOne
-    private Film film;
+
+    @OneToMany(mappedBy="character", fetch=FetchType.EAGER)
+    Set<CharacterFilm> characterFilms = new HashSet<>();
 
     public Character() {
     }
 
-    public Character(String image, String name, Integer age, Integer weight, String story, Film film){
+    public Character(String image, String name, Integer age, Integer weight, String story){
         this.image = image;
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.story = story;
-        this.film = film;
     }
 
     public Long getId() {
@@ -74,11 +76,12 @@ public class Character {
         this.story = story;
     }
 
-    public Film getFilm() {
-        return film;
+    public Set<CharacterFilm> getCharacterFilms() {
+        return characterFilms;
     }
 
-    public void setFilm(Film film) {
-        this.film = film;
+    public void addCharacterFilm(CharacterFilm characterFilm) {
+        characterFilm.setCharacter(this);
+        characterFilms.add(characterFilm);
     }
 }
