@@ -2,7 +2,7 @@
 # Disney API
 
 
-Disney API is an RESTFull application for the alkemy challenge.
+Disney API is a RESTFul application for the alkemy challenge.
 
 
 ## Tech Stack
