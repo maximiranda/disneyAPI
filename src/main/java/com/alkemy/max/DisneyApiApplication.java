@@ -23,11 +23,11 @@ public class DisneyApiApplication {
 	@Bean
 	public CommandLineRunner initData(FilmRepository filmRepository, CharacterRepository characterRepository, GenreRepository genreRepository, CharacterFilmRepository characterFilmRepository, AdminRepository adminRepository){
 		return (args) -> {
-			Admin admin = new Admin("Maxi", "admin@gmail.com", passwordEncoder.encode("maxi12345"));
+			Admin admin = new Admin("Maxi", "admin@gmail.com", passwordEncoder.encode("password"));
 			Genre action = new Genre("Action", "./action");
 			Genre fantasy = new Genre("fantasy", "./fantasy");
-			Film film1 = new Film("Thor: Love and Thunder", "./hola",new Date(), Rating.TREE, action);
-			Film film2 = new Film("Obi-Wan Kenobi", "./obi",new Date(), Rating.FIVE, fantasy);
+			Film film1 = new Film("Thor: Love and Thunder", "./hola",new Date(10,2,4), Rating.TREE, action);
+			Film film2 = new Film("Obi-Wan Kenobi", "./obi",new Date(9,1,2), Rating.FIVE, fantasy);
 			Character character1 = new Character("/hoa", "Thor", 27, 100, "Thor Odinson is the Asgardian God of Thunder, the former king of Asgard and New Asgard, and a founding member of the Avengers");
 			Character character2 = new Character("/hoa", "Obi", 45, 100, "Thor Odinson is the Asgardian God of Thunder, the former king of Asgard and New Asgard, and a founding member of the Avengers");
 			Character character3 = new Character("/hoa", "Leia", 23, 100, "Thor Odinson is the Asgardian God of Thunder, the former king of Asgard and New Asgard, and a founding member of the Avengers");

@@ -18,7 +18,7 @@ public class Film {
     private Date creationDate;
     private Rating rating;
 
-    @OneToMany(mappedBy="film", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="film", orphanRemoval = true, fetch=FetchType.EAGER)
     Set<CharacterFilm> characterFilms = new HashSet<>();
     @ManyToOne
     @JoinColumn(name="genre_id")

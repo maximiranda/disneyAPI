@@ -1,11 +1,13 @@
 package com.alkemy.max.dtos;
 
 import com.alkemy.max.models.Character;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Getter
 public class CharacterDTO {
     private Long id;
     private String name, image, story;
@@ -22,31 +24,4 @@ public class CharacterDTO {
         this.films = character.getCharacterFilms().stream().map(characterFilm -> new CharacterFilmDTO(characterFilm).getFilm()).collect(Collectors.toSet());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getStory() {
-        return story;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public Set<String> getFilms() {
-        return films;
-    }
 }

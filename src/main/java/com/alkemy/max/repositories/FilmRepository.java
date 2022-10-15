@@ -11,7 +11,5 @@ import java.util.Set;
 public interface FilmRepository extends JpaRepository<Film,Long> {
     public Set<Film> findAllByTitle(String title);
     public Set<Film> findAllByGenre(Genre genre);
-    public Set<Film> findAllByOrderByIdAsc();
-    public Set<Film> findAllByOrderByIdDesc();
 
 }

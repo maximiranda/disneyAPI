@@ -18,7 +18,7 @@ public class Character {
     private Integer weight;
     private String story;
 
-    @OneToMany(mappedBy="character", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="character", orphanRemoval = true, fetch=FetchType.EAGER)
     Set<CharacterFilm> characterFilms = new HashSet<>();
 
     public Character() {

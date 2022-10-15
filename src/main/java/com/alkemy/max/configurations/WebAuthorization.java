@@ -1,6 +1,7 @@
 package com.alkemy.max.configurations;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,8 +20,12 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                /*.antMatchers("/api/**").hasAuthority("ADMIN");*/
-                .antMatchers("/api/**").hasAuthority("ADMIN");
+                .antMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
+                .antMatchers("/api/").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST,"/api/characters", "/api/movies").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH,"/api/characters", "/api/movies").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/characters", "/api/movies").hasAuthority("ADMIN");
         http.formLogin()
 
                 .usernameParameter("email")
